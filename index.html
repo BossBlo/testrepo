@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>XeViệt — Đặt & Thuê Xe</title>
+    <meta name="description"
+        content="Thuê xe ô tô, xe máy giá rẻ tại Việt Nam. Cho thuê xe tự lái, xe có tài xế, đưa đón sân bay, du lịch, công tác. Đặt xe nhanh qua Zalo, giao tận nơi trong 10 phút. Hỗ trợ 24/7, giá tốt nhất thị trường.">
+    <meta name="keywords"
+        content="thuê xe, thuê ô tô, thuê xe máy, thuê xe sân bay, thuê xe tự lái, thuê xe giá rẻ, dịch vụ đưa đón">
+    <meta name="author" content="Thuê xê việt 24/7">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="180x180" href="/icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icon.png">
+    
+
+
+    <style>
+        :root {
+            --brand-red: #d62828;
+            --brand-dark: #9d0208;
+            --gray-bg: #f5f5f5;
+            --gray-text: #333;
+            --accent: #ffb703;
+        }
+
+        body {
+            font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial;
+            background: var(--gray-bg);
+            color: var(--gray-text);
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+            animation: zoomIn 0.8s ease;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: linear-gradient(90deg, var(--brand-red), var(--brand-dark));
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            color: #fff !important;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-link {
+            color: #fff !important;
+            transition: 0.3s;
+        }
+
+        .nav-link:hover {
+            color: var(--accent) !important;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(180deg, rgba(214, 40, 40, 0.85), rgba(157, 2, 8, 0.75)),
+                url('img/xe.jpg') center/cover no-repeat;
+            color: #fff;
+            text-align: center;
+            padding: 90px 0;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            animation: fadeInDown 1.2s ease-in-out;
+        }
+
+        .hero h1 {
+            font-size: 2.3rem;
+            font-weight: 700;
+        }
+
+        /* Card */
+        .card-ghost {
+            border: none;
+            border-radius: 14px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+            background: #fff;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card-ghost:hover {
+            transform: scale(1.03);
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Section title */
+        .section-title {
+            font-weight: 700;
+            color: var(--brand-red);
+            margin: 48px 0 20px;
+            text-align: center;
+        }
+
+        /* Table */
+        .table thead th {
+            background: #ffe5e5;
+            border-top: 0;
+            font-weight: 600;
+        }
+
+        .table tbody tr:hover {
+            background: #fff5f5;
+            transition: 0.2s;
+        }
+
+        /* Buttons */
+        .btn-brand {
+            background: var(--brand-red);
+            color: #fff;
+            border: none;
+            transition: 0.3s;
+        }
+
+        .btn-brand:hover {
+            background: var(--brand-dark);
+            color: #fff;
+        }
+
+        .btn-outline-brand {
+            border: 1.5px solid var(--brand-red);
+            color: var(--brand-red);
+            transition: 0.3s;
+        }
+
+        .btn-outline-brand:hover {
+            background: var(--brand-red);
+            color: #fff;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(90deg, var(--brand-red), var(--brand-dark));
+            padding: 25px 0;
+            text-align: center;
+            margin-top: 60px;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .contact-btns .btn {
+            min-width: 140px;
+            font-weight: 600;
+            margin: 5px;
+            border-radius: 50px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .contact-btns .btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* Section scroll animation */
+        .section-animate {
+            opacity: 0;
+            transform: scale(0.95);
+            transition: all 0.6s ease;
+        }
+
+        .section-animate.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* List group hover */
+        .list-group-item {
+            transition: 0.3s;
+        }
+
+        .list-group-item:hover {
+            transform: scale(1.02);
+            background: #fff0f0;
+        }
+
+        /* Keyframes */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.97);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @media(max-width:576px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+        }
+
+        /* Hiệu ứng phóng to – thu nhỏ lặp lại */
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.08);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* Áp dụng cho tất cả nút */
+        .btn {
+            animation: pulse 2.2s ease-in-out infinite;
+        }
+    </style>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LT9YS7QGT7"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-LT9YS7QGT7');
+    </script>
+
+</head>
+
+<body>
+
+    <!-- NAV -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="#">XeViệt</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+                <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="menu">
+                <ul class="navbar-nav ms-auto gap-2">
+                    <li class="nav-item"><a class="nav-link" href="#datxe">Đặt xe</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#thuexeoto">Thuê ô tô</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#thuexemay">Thuê xe máy</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#datgan">Khách hàng gần đây</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <header class="hero">
+        <div class="container">
+            <h1>Thuê xe nhanh — đơn giản — an tâm</h1>
+            <p class="lead mt-2">Nhập điểm đón và điểm đến — chúng tôi sẽ báo giá ngay trên Zalo.</p>
+            <a href="#datxe" class="btn btn-lg btn-brand mt-2">Đặt xe ngay</a> <br>
+            <a href="#footer" class="btn btn-light border btn-animated mt-2">Liên hệ</a>
+        </div>
+    </header>
+
+    <main class="container my-5">
+
+        <!-- FORM ĐẶT XE -->
+        <section id="datxe" class="section-animate">
+            <h2 class="section-title">📝 Đặt xe nhanh</h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="card card-ghost p-4">
+                        <form id="bookingForm" class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Họ và tên</label>
+                                <input id="inputName" class="form-control" placeholder="Nguyễn Văn A" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Số điện thoại</label>
+                                <input id="inputPhone" class="form-control" type="tel" placeholder="0987xxxxxx"
+                                    required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Điểm đón</label>
+                                <input id="inputPickup" class="form-control" placeholder="VD: Sân bay Long Thành"
+                                    required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Điểm đến</label>
+                                <input id="inputDropoff" class="form-control" placeholder="VD: Khách sạn Miliion"
+                                    required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Loại xe</label>
+                                <select id="inputType" class="form-select">
+                                    <option>Xe máy</option>
+                                    <option>Xe 4 chỗ</option>
+                                    <option>Xe 7 chỗ</option>
+                                    <option>Xe 16 chỗ</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 d-flex align-items-end justify-content-end">
+                                <button class="btn btn-brand px-4" type="submit">Gửi yêu cầu</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- THUÊ Ô TÔ -->
+        <section id="thuexeoto" class="mt-5 section-animate">
+            <h2 class="section-title">🚘 Thuê ô tô tự lái</h2>
+            <div class="card card-ghost p-3">
+                <div class="table-responsive">
+                    <table class="table table-hover text-center align-middle">
+                        <thead>
+                            <tr>
+                                <th>Tên xe</th>
+                                <th>Giá thuê/ngày</th>
+                                <th>Liên hệ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Xe 4 chỗ</td>
+                                <td><strong>600.000đ</strong></td>
+                                <td><a href="tel:0987654321" class="btn btn-outline-brand btn-sm">Gọi ngay</a></td>
+                            </tr>
+                            <tr>
+                                <td>Xe 7 chỗ</td>
+                                <td><strong>900.000đ</strong></td>
+                                <td><a href="tel:0987654321" class="btn btn-outline-brand btn-sm">Gọi ngay</a></td>
+                            </tr>
+                            <tr>
+                                <td>Xe 16 chỗ</td>
+                                <td><strong>1.200.000đ</strong></td>
+                                <td><a href="tel:0987654321" class="btn btn-outline-brand btn-sm">Gọi ngay</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- THUÊ XE MÁY -->
+        <section id="thuexemay" class="mt-5 section-animate">
+            <h2 class="section-title">🏍️ Thuê xe máy</h2>
+            <div class="card card-ghost p-3">
+                <div class="table-responsive">
+                    <table class="table table-hover text-center align-middle">
+                        <thead>
+                            <tr>
+                                <th>Tên xe</th>
+                                <th>Giá thuê/ngày</th>
+                                <th>Liên hệ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Xe tay ga</td>
+                                <td><strong>120.000đ</strong></td>
+                                <td><a href="tel:0987654321" class="btn btn-outline-brand btn-sm">Gọi ngay</a></td>
+                            </tr>
+                            <tr>
+                                <td>Xe số</td>
+                                <td><strong>100.000đ</strong></td>
+                                <td><a href="tel:0987654321" class="btn btn-outline-brand btn-sm">Gọi ngay</a></td>
+                            </tr>
+                            <tr>
+                                <td>Xe côn tay</td>
+                                <td><strong>150.000đ</strong></td>
+                                <td><a href="tel:0987654321" class="btn btn-outline-brand btn-sm">Gọi ngay</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- KHÁCH HÀNG GẦN ĐÂY -->
+        <section id="datgan" class="mt-5 section-animate">
+            <h2 class="section-title">🧾 Khách hàng gần đây</h2>
+            <div class="card card-ghost p-3">
+                <div class="list-group">
+                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                        <div>🚗 Anh Minh đã đặt xe 7 chỗ đi <strong>TP.HCM → Hà Nội</strong></div>
+                        <span class="badge bg-danger rounded-pill">3.500.000đ</span>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                        <div>🏍️ Chị Lan thuê xe tay ga tại <strong>Đà Lạt</strong></div>
+                        <span class="badge bg-secondary rounded-pill">150.000đ</span>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                        <div>🚘 Anh Tuấn đặt xe 4 chỗ đi <strong>Sân bay → Khách sạn Miliion</strong></div>
+                        <span class="badge bg-danger rounded-pill">250.000đ</span>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                        <div>🚗 Chị Hương thuê xe 16 chỗ đi <strong>Đà Nẵng</strong></div>
+                        <span class="badge bg-secondary rounded-pill">1.200.000đ</span>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                        <div>🚕 Anh Bình đặt xe 4 chỗ đi <strong>Nha Trang → Cam Ranh</strong></div>
+                        <span class="badge bg-danger rounded-pill">380.000đ</span>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                        <div>🚐 Chị Ngọc thuê xe 7 chỗ đi <strong>Hội An</strong></div>
+                        <span class="badge bg-secondary rounded-pill">800.000đ</span>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                        <div>🏍️ Anh Duy thuê xe côn tay tại <strong>Huế</strong></div>
+                        <span class="badge bg-secondary rounded-pill">160.000đ</span>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                        <div>🚗 Anh Hào đặt xe 4 chỗ đi <strong>TP.HCM → Vũng Tàu</strong></div>
+                        <span class="badge bg-danger rounded-pill">900.000đ</span>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                        <div>🏍️ Chị My thuê xe số tại <strong>Đà Nẵng</strong></div>
+                        <span class="badge bg-secondary rounded-pill">120.000đ</span>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                        <div>🚘 Anh Phong đặt xe 7 chỗ đi <strong>Hà Nội → Sapa</strong></div>
+                        <span class="badge bg-danger rounded-pill">2.000.000đ</span>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                        <div>🚗 Chị Vy thuê xe 16 chỗ đi <strong>Huế → Quảng Bình</strong></div>
+                        <span class="badge bg-secondary rounded-pill">1.800.000đ</span>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                        <div>🏍️ Anh Long thuê xe tay ga tại <strong>Phú Quốc</strong></div>
+                        <span class="badge bg-secondary rounded-pill">180.000đ</span>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                        <div>🚗 Anh Quang đặt xe 4 chỗ đi <strong>Nha Trang → Đà Lạt</strong></div>
+                        <span class="badge bg-danger rounded-pill">950.000đ</span>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                        <div>🚐 Chị Hằng thuê xe 7 chỗ đi <strong>TP.HCM → Bến Tre</strong></div>
+                        <span class="badge bg-secondary rounded-pill">750.000đ</span>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                        <div>🏍️ Anh Kiệt thuê xe côn tay tại <strong>Ninh Bình</strong></div>
+                        <span class="badge bg-secondary rounded-pill">170.000đ</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer id="footer">
+        <div class="container contact-btns">
+            <a href="tel:0987654321" class="btn btn-light">📞 0987 654 321</a>
+            <a href="https://zalo.me/0987654321" target="_blank" class="btn btn-success">💬 Zalo</a>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Hiệu ứng phóng to khi cuộn
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        });
+        document.querySelectorAll('.section-animate').forEach(sec => {
+            observer.observe(sec);
+        });
+
+        // Gửi telegram
+        const TELE_TOKEN = "7988151145:AAFTMbh87qK7yeM0gMB19vOEoT6fdMnCyao";
+        const TELE_CHAT_ID = "6441640515";
+        async function sendTelegram(text) {
+            if (!TELE_TOKEN || !TELE_CHAT_ID) return;
+            const url = `https://api.telegram.org/bot${TELE_TOKEN}/sendMessage`;
+            await fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ chat_id: TELE_CHAT_ID, text }) });
+        }
+
+        document.getElementById("bookingForm").addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const n = inputName.value.trim(), p = inputPhone.value.trim(), a = inputPickup.value.trim(), b = inputDropoff.value.trim(), t = inputType.value;
+            const msg = `🆕 YÊU CẦU ĐẶT XE\n👤 ${n}\n📞 ${p}\n📍 ${a} → ${b}\n🚘 ${t}`;
+            await sendTelegram(msg);
+            alert("✅ Đã gửi yêu cầu, chúng tôi sẽ liên hệ sớm!");
+            e.target.reset();
+        });
+    </script>
+</body>
+
+</html>
