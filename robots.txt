@@ -1,3 +1,4 @@
 User-agent: *
 Allow: /
-Sitemap: https://thuexeviet247.bossblo.id.vn/sitemap.xml
+Sitemap: https://thuexenhanh247.com/sitemap.xml
+
