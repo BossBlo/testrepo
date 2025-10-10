@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
-Sitemap: https://thuexenhanh247.com/sitemap.xml
+Sitemap: https://thuexenhanh.work.gd/sitemap.xml
+
 
